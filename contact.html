@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacts</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Contact • Patrick Niyigena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<button class="menu-toggle" type="button" aria-label="Toggle menu" data-menu-toggle>
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+<div class="menu-overlay" data-menu-overlay></div>
 
 <div class="container">
-
-    <!-- Sidebar -->
     <aside class="sidebar">
         <div class="profile">
-            <img src="images/profile.jpg" alt="Profile">
-            <h2>Patrick NIYIGENA</h2>
+            <img src="images/profile.jpg" alt="Patrick Niyigena">
+            <div>
+                <p class="eyebrow">Web Developer</p>
+                <h2>Patrick Niyigena</h2>
+            </div>
         </div>
 
         <nav class="menu">
@@ -23,58 +33,81 @@
             <a href="about.html">About Me</a>
             <a href="services.html">What I Do</a>
             <a href="portfolio.html">Portfolio</a>
-            <a href="contact.html" class="active">Contacts</a>
+            <a href="contact.html" class="active">Contact</a>
         </nav>
+
+        <button class="theme-toggle" type="button" data-theme-toggle>
+            <i class="fa-solid fa-circle-half-stroke"></i>
+            <span>Switch Theme</span>
+        </button>
+
+        <div class="sidebar-footer">
+            <p>Available for freelance work</p>
+            <div class="social-icons">
+                <a href="https://x.com/PattyWambere" aria-label="X (formerly Twitter)" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/pattynobleman" aria-label="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://github.com/PattyWambere" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+                <a href="https://pin.it/6XOJNPvdQ" aria-label="Pinterest" target="_blank" rel="noopener"><i class="fa-brands fa-pinterest"></i></a>
+            </div>
+        </div>
     </aside>
 
-    <!-- Contact Content -->
-    <main class="content">
+    <main class="content page">
+        <div class="ghost-title">Contact</div>
+        <div class="content-wrapper">
+            <p class="eyebrow">Let’s talk</p>
+            <h1>Tell me about your next project.</h1>
+            <p class="lead">Whether you need a new marketing site, a product design partner, or support for an existing team, I’d love to hear from you.</p>
 
-        <h2 class="page-title">Get <span class="green">In</span> Touch</h2>
+            <div class="contact-wrapper">
+                <div class="contact-card">
+                    <h3 style="margin-bottom: 18px;">Address</h3>
+                    <p>4th Floor, Plot No.22,<br>145 Kigali Gatuna Rd,<br>Karuruma CA 2028</p>
 
-        <div class="contact-wrapper">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <p>+250 786 352 983</p>
+                            <p>+250 735 487 500</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>chat@patrick.com</div>
+                    </div>
 
-            <!-- Left section -->
-            <div class="contact-left">
-                <h3 style="color: white;">ADDRESS</h3>
-                <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    4th Floor, Plot No 22,<br>
-                    145 Kigali Gatuna Rd,<br>
-                    Kacyiru CA 2028
-                </p>
+                    <h3 style="margin: 32px 0 12px;">Follow</h3>
+                    <div class="follow-list">
+                        <a href="https://www.instagram.com/pattynobleman" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://x.com/PattyWambere" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://github.com/PattyWambere" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://pin.it/6XOJNPvdQ" target="_blank" rel="noopener"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
 
-                <br>
-                <p>
-                    <i class="fa-solid fa-fax"></i> +250 786 352 983<br>
-                    <i class="fa-solid fa-phone"></i> +250 735 467 500<br>
-                    <i class="fa-solid fa-envelope"></i> chat@patrick.com
-                </p>
+                <div class="contact-card form-card">
+                    <h3 style="margin-bottom: 18px;">Send a message</h3>
+                    <form data-contact-form data-endpoint="https://formspree.io/f/meobgnzy" novalidate>
+                        <label class="sr-only" for="contact-name">Name</label>
+                        <input id="contact-name" name="name" type="text" placeholder="Name" minlength="2" required>
 
-                <h3 style="color: white;">FOLLOW ME</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <label class="sr-only" for="contact-email">Email</label>
+                        <input id="contact-email" name="_replyto" type="email" placeholder="Email" required>
+
+                        <label class="sr-only" for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" rows="5" placeholder="Tell me more about your needs..." minlength="10" required></textarea>
+
+                        <input type="text" name="_gotcha" class="form-honeypot" tabindex="-1" autocomplete="off">
+                        <div class="form-status" aria-live="polite" data-form-status></div>
+
+                        <button class="btn primary" type="submit" data-form-submit>Send Message</button>
+                    </form>
                 </div>
             </div>
-
-            <!-- Right section (form) -->
-            <div class="contact-right">
-                <form>
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Message..." rows="5" required></textarea>
-                    <button type="submit" class="btn" style="background-color: #00ff55;color: #080808;">SEND</button>
-                </form>
-            </div>
-
         </div>
-
     </main>
-
 </div>
 
+<script src="main.js"></script>
 </body>
 </html>
