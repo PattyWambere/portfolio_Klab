@@ -5,6 +5,7 @@
     const menuToggle = document.querySelector('[data-menu-toggle]');
     const menuOverlay = document.querySelector('[data-menu-overlay]');
     const sidebarLinks = document.querySelectorAll('.sidebar a');
+    let dismissProjectModal = null;
     menuToggle?.setAttribute('aria-expanded', 'false');
 
     const getStoredTheme = () => {
@@ -109,6 +110,9 @@
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             toggleMenu(false);
+            if (typeof dismissProjectModal === 'function') {
+                dismissProjectModal();
+            }
         }
     });
 
@@ -138,6 +142,76 @@
         });
 
         changeFilter('all');
+    }
+
+    // Portfolio modal
+    const projectModal = document.querySelector('[data-project-modal]');
+    if (projectModal) {
+        const projectTitle = projectModal.querySelector('[data-project-title]');
+        const projectSubtitle = projectModal.querySelector('[data-project-subtitle]');
+        const projectDescription = projectModal.querySelector('[data-project-description]');
+        const projectTools = projectModal.querySelector('[data-project-tools]');
+        const projectCategory = projectModal.querySelector('[data-project-category]');
+        const projectImage = projectModal.querySelector('[data-project-image]');
+        const projectLink = projectModal.querySelector('[data-project-link]');
+        const closeButtons = projectModal.querySelectorAll('[data-project-close], [data-project-close-secondary]');
+
+        const formatCategories = (value) =>
+            value
+                .split(' ')
+                .filter(Boolean)
+                .map((cat) => cat.charAt(0).toUpperCase() + cat.slice(1))
+                .join(', ');
+
+        const closeModal = () => {
+            projectModal.classList.remove('active');
+            body.removeAttribute('data-project-open');
+        };
+
+        dismissProjectModal = closeModal;
+
+        const openModal = (item) => {
+            const dataset = item.dataset;
+            projectTitle.textContent = dataset.title || 'Project';
+            projectSubtitle.textContent = dataset.subtitle || '';
+            projectDescription.textContent = dataset.description || 'Case study coming soon.';
+            projectTools.textContent = dataset.tools || '';
+            projectCategory.textContent = dataset.category ? formatCategories(dataset.category) : 'Project';
+
+            const imageSrc = dataset.image || item.querySelector('img')?.getAttribute('src');
+            if (imageSrc) {
+                projectImage.src = imageSrc;
+                projectImage.alt = dataset.title || 'Project preview';
+            }
+
+            if (projectLink) {
+                const href = dataset.link && dataset.link !== '#' ? dataset.link : '#';
+                projectLink.href = href;
+                projectLink.target = href === '#' ? '_self' : '_blank';
+                projectLink.textContent = href === '#' ? 'Case study coming soon' : 'Launch project';
+                projectLink.classList.toggle('disabled', href === '#');
+            }
+
+            projectModal.classList.add('active');
+            body.setAttribute('data-project-open', 'true');
+        };
+
+        const triggers = document.querySelectorAll('[data-project-trigger]');
+        triggers.forEach((trigger) => {
+            trigger.addEventListener('click', () => {
+                const parent = trigger.closest('[data-portfolio-item]');
+                if (parent) {
+                    openModal(parent);
+                }
+            });
+        });
+
+        closeButtons.forEach((btn) => btn.addEventListener('click', closeModal));
+        projectModal.addEventListener('click', (event) => {
+            if (event.target === projectModal) {
+                closeModal();
+            }
+        });
     }
 
     // Contact form submission via Formspree (or similar)
