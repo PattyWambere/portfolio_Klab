@@ -155,6 +155,7 @@
         const projectImage = projectModal.querySelector('[data-project-image]');
         const projectDemo = projectModal.querySelector('[data-project-demo]');
         const projectRepo = projectModal.querySelector('[data-project-repo]');
+        const projectDownload = projectModal.querySelector('[data-project-download]');
         const closeButtons = projectModal.querySelectorAll('[data-project-close], [data-project-close-secondary]');
 
         const formatCategories = (value) =>
@@ -194,18 +195,31 @@
                 el.classList.toggle('disabled', safeHref === '#');
             };
 
+            const isWebsite = dataset.category?.includes('website');
             const hasDemo = dataset.demo && dataset.demo !== '#';
             const hasRepo = dataset.repo && dataset.repo !== '#';
+            const downloadHref = dataset.download || dataset.image || '#';
+            const hasDownload = downloadHref && downloadHref !== '#';
 
             if (projectDemo) {
                 projectDemo.dataset.label = hasDemo ? 'Open demo' : 'Demo coming soon';
+                projectDemo.classList.toggle('hidden', !isWebsite);
             }
             if (projectRepo) {
                 projectRepo.dataset.label = hasRepo ? 'View repo' : 'Repo coming soon';
+                projectRepo.classList.toggle('hidden', !isWebsite);
+            }
+            if (projectDownload) {
+                projectDownload.dataset.label = 'Download';
+                projectDownload.classList.toggle('hidden', isWebsite);
             }
 
-            setCta(projectDemo, dataset.demo, 'Demo coming soon');
-            setCta(projectRepo, dataset.repo, 'Repo coming soon');
+            if (isWebsite) {
+                setCta(projectDemo, dataset.demo, 'Demo coming soon');
+                setCta(projectRepo, dataset.repo, 'Repo coming soon');
+            } else {
+                setCta(projectDownload, downloadHref, 'Download not available');
+            }
 
             projectModal.classList.add('active');
             body.setAttribute('data-project-open', 'true');

@@ -794,6 +794,10 @@ body[data-menu-open="true"] .menu-overlay {
     border: 0;
 }
 
+.hidden {
+    display: none !important;
+}
+
 /* Responsive */
 @media (max-width: 1080px) {
     .container {
