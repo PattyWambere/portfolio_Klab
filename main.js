@@ -153,7 +153,8 @@
         const projectTools = projectModal.querySelector('[data-project-tools]');
         const projectCategory = projectModal.querySelector('[data-project-category]');
         const projectImage = projectModal.querySelector('[data-project-image]');
-        const projectLink = projectModal.querySelector('[data-project-link]');
+        const projectDemo = projectModal.querySelector('[data-project-demo]');
+        const projectRepo = projectModal.querySelector('[data-project-repo]');
         const closeButtons = projectModal.querySelectorAll('[data-project-close], [data-project-close-secondary]');
 
         const formatCategories = (value) =>
@@ -184,13 +185,27 @@
                 projectImage.alt = dataset.title || 'Project preview';
             }
 
-            if (projectLink) {
-                const href = dataset.link && dataset.link !== '#' ? dataset.link : '#';
-                projectLink.href = href;
-                projectLink.target = href === '#' ? '_self' : '_blank';
-                projectLink.textContent = href === '#' ? 'Case study coming soon' : 'Launch project';
-                projectLink.classList.toggle('disabled', href === '#');
+            const setCta = (el, href, fallbackText) => {
+                if (!el) return;
+                const safeHref = href && href !== '#' ? href : '#';
+                el.href = safeHref;
+                el.target = safeHref === '#' ? '_self' : '_blank';
+                el.textContent = safeHref === '#' ? fallbackText : el.dataset.label || fallbackText;
+                el.classList.toggle('disabled', safeHref === '#');
+            };
+
+            const hasDemo = dataset.demo && dataset.demo !== '#';
+            const hasRepo = dataset.repo && dataset.repo !== '#';
+
+            if (projectDemo) {
+                projectDemo.dataset.label = hasDemo ? 'Open demo' : 'Demo coming soon';
             }
+            if (projectRepo) {
+                projectRepo.dataset.label = hasRepo ? 'View repo' : 'Repo coming soon';
+            }
+
+            setCta(projectDemo, dataset.demo, 'Demo coming soon');
+            setCta(projectRepo, dataset.repo, 'Repo coming soon');
 
             projectModal.classList.add('active');
             body.setAttribute('data-project-open', 'true');
